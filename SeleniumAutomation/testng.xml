@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test thread-count="2"  parallel="methods" name="C:/Users/Alvin 2/eclipse-workspace/SeleniumAutomation/src/main/java/com/teladoc/testcases/TC_SignIn.java">
+        <classes>
+            <class name="com.teladoc.testcases.TC_SignIn">
+                <methods>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
