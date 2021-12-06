@@ -1,73 +1,109 @@
 package com.teladoc.pageImpl;
 
+import com.google.common.base.Function;
 import com.teladoc.pageObject.SignInObject;
+import com.teladoc.utilities.DeviceHelper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.w3c.dom.html.HTMLInputElement;
+
+import java.util.concurrent.TimeUnit;
 
 public class SignInImpl extends SignInObject {
-
-    protected WebDriver driver;
-
+    DeviceHelper helper;
+    WebDriverWait wait;
 
     public SignInImpl(WebDriver driver){
         PageFactory.initElements(driver,this);
     }
 
-    public void addUserAndValidate(WebDriver driver, String fName, String lName, String uName, String pWord,String Company, String eMail, String pNumber, String Role)throws InterruptedException {
-        Thread.sleep(5000);
+    public void addUserAndValidate(WebDriver driver, String fName, String lName, String uName,
+                                   String pWord,String Company, String eMail, String pNumber, String Role) throws InterruptedException {
+        wait = new WebDriverWait(driver,30);
+        wait.until(ExpectedConditions.visibilityOf(ADDUSER));
+        wait.until(ExpectedConditions.elementToBeClickable(ADDUSER));
         ADDUSER.click();
         System.out.println("adding user");
-        Thread.sleep(1000);
         FIRSTNAME.sendKeys(fName);
-        Thread.sleep(1000);
         LASTNAME.sendKeys(lName);
-        Thread.sleep(1000);
         USERNAME.sendKeys(uName);
-        Thread.sleep(1000);
+
         PASSWORD.sendKeys(pWord);
-        Thread.sleep(1000);
         switch (Company) {
             case "COMPANYAAA":
+                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
                 COMPANYAAA.click();
                 break;
             case "COMPANYBBB":
+                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
                 COMPANYBBB.click();
                 break;
         }
-        Thread.sleep(1000);
         EMAIL.sendKeys(eMail);
-        Thread.sleep(1000);
         MOBILEPHONE.sendKeys(pNumber);
-        Thread.sleep(1000);
         switch (Role) {
             case "SALES":
+                wait.until(ExpectedConditions.elementToBeClickable(SALESTEAM));
                 SALESTEAM.click();
                 break;
             case "CUSTOMER":
+                wait.until(ExpectedConditions.elementToBeClickable(CUSTOMER));
                 CUSTOMER.click();
+                break;
             case "ADMIN":
+                wait.until(ExpectedConditions.elementToBeClickable(ADMIN));
                 ADMIN.click();
                 break;
         }
+        wait.until(ExpectedConditions.elementToBeClickable(SAVEBUTTON));
         SAVEBUTTON.click();
-        Thread.sleep(5000);
         System.out.println("validating user");
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'"+fName+"')]")));
-        }
-
-        public void deleteUser(WebDriver driver, String uName) throws InterruptedException {
-            Thread.sleep(5000);
-            driver.findElement(By.xpath("//tr//td[text()='"+uName+"']//following-sibling::td//button[@ng-click='delUser()']")).click();
-            Thread.sleep(5000);
-            OKBUTTON.click();
-            Thread.sleep(5000);
-            Assert.assertEquals(0,(driver.findElements(By.xpath("//tr//td[text()='"+uName+"']")).size()));
-            Thread.sleep(5000);
-        }
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//td[contains(text(),'"+fName+"')]"))));
     }
+
+    public void deleteUser(WebDriver driver, String uName) throws InterruptedException {
+        Thread.sleep(5000);
+        Wait<WebDriver> fWait = new FluentWait<>(driver)
+                .withTimeout(30, TimeUnit.SECONDS)
+                .pollingEvery(1, TimeUnit.SECONDS)
+                .ignoring(NoSuchElementException.class);
+
+        WebElement element = fWait.until(new Function<WebDriver, WebElement>(){
+            WebDriverWait wait = new WebDriverWait(driver,10);
+            public WebElement apply(WebDriver driver) {
+                WebElement ele = driver.findElement(By.xpath("//tr//td[text()='" + uName + "']"));
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")));
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")));
+
+                if (ele.isDisplayed()) {
+                    System.out.println("element displayed?: " + ele.isDisplayed());
+                    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")));
+                    driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")).click();
+                    helper = new DeviceHelper(driver);
+                    try {
+                        helper.fluentWait(driver,OKBUTTON);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    wait.until(ExpectedConditions.elementToBeClickable(OKBUTTON));
+                    OKBUTTON.click();
+                    wait.until(ExpectedConditions.visibilityOf(LASTNAMETAB));
+                    wait.until(ExpectedConditions.elementToBeClickable(LASTNAMETAB));
+                    return ele;
+                } else {
+                    System.out.println("element displayed?: " + ele.isDisplayed());
+                    return null;
+                }
+            }
+
+        });
+        Assert.assertEquals(0,(driver.findElements(By.xpath("//tr//td[text()='" + uName + "']")).size()));
+    }
+}

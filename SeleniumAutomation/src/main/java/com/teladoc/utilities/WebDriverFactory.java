@@ -1,27 +1,39 @@
 package com.teladoc.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.poi.ss.formula.functions.WeekNum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class WebDriverFactory {
+    private static WebDriverFactory instance = null;
+    static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    public void setDriver(String BROWSERTYPE) {
 
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
-
-    public static  void setDriver() {
-        WebDriverManager.chromedriver().setup();
-        driver.set(new ChromeDriver());
+        switch (BROWSERTYPE) {
+            case "CHROME":
+                WebDriverManager.chromedriver().setup();
+                driver.set(new ChromeDriver());
+                break;
+        }
     }
 
-    public static WebDriver getDriver()
+    public static WebDriverFactory getInstance(){
+        if (instance == null ){
+            instance = new WebDriverFactory();
+        }
+        return instance;
+    }
+
+    public WebDriver getDriver()
     {
         return driver.get();
     }
 
-    public static void closeBrowser()
+    public static void quitDriver()
     {
-        driver.get().close();
-        driver.remove();
+        driver.get().quit();
     }
+
 
 }
