@@ -34,7 +34,6 @@ public class SignInImpl extends SignInObject {
         FIRSTNAME.sendKeys(fName);
         LASTNAME.sendKeys(lName);
         USERNAME.sendKeys(uName);
-
         PASSWORD.sendKeys(pWord);
         switch (Company) {
             case "COMPANYAAA":
