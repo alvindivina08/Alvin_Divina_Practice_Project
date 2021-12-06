@@ -4,6 +4,7 @@ import com.teladoc.utilities.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 public class BaseClass {
     ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
@@ -11,9 +12,10 @@ public class BaseClass {
     WebDriverFactory webDriverFactory;
 
     @BeforeMethod
-    public void setUp() throws InterruptedException {
+    @Parameters({"Browser"})
+    public void setUp(String Browser) throws InterruptedException {
         webDriverFactory = WebDriverFactory.getInstance();
-        webDriverFactory.setDriver("CHROME");
+        webDriverFactory.setDriver(Browser);
         driver.set(webDriverFactory.getDriver());
         Thread.sleep(5000);
         driver.get().get(URL);

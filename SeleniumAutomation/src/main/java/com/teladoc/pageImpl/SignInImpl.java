@@ -69,7 +69,6 @@ public class SignInImpl extends SignInObject {
     }
 
     public void deleteUser(WebDriver driver, String uName) throws InterruptedException {
-        Thread.sleep(5000);
         Wait<WebDriver> fWait = new FluentWait<>(driver)
                 .withTimeout(30, TimeUnit.SECONDS)
                 .pollingEvery(1, TimeUnit.SECONDS)

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test thread-count="2"  parallel="methods" name="src/main/java/com/teladoc/testcases/TC_SignIn.java">
+    <test thread-count="4"  parallel="methods" name="src/main/java/com/teladoc/testcases/TC_SignIn.java">
         <classes>
             <class name="com.teladoc.testcases.TC_SignIn">
+                <parameter name="Browser" value="CHROME"></parameter>
                 <methods>
                 </methods>
             </class>
