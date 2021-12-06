@@ -3,7 +3,7 @@
 <suite name="All Test Suite">
     <test thread-count="4"  parallel="methods" name="src/main/java/com/teladoc/testcases/TC_SignIn.java">
         <classes>
-            <class name="com.teladoc.testcases.TC_SignIn">
+            <class name="com.testpractice.testcases.TC_SignIn">
                 <parameter name="Browser" value="CHROME"></parameter>
                 <methods>
                 </methods>

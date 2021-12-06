@@ -1,8 +1,8 @@
-package com.teladoc.pageImpl;
+package com.testpractice.pageImpl;
 
 import com.google.common.base.Function;
-import com.teladoc.pageObject.SignInObject;
-import com.teladoc.utilities.DeviceHelper;
+import com.testpractice.pageObject.SignInObject;
+import com.testpractice.utilities.DeviceHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;

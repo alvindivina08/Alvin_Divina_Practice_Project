@@ -1,6 +1,6 @@
-package com.teladoc.testcases;
+package com.testpractice.testcases;
 
-import com.teladoc.pageImpl.SignInImpl;
+import com.testpractice.pageImpl.SignInImpl;
 import org.testng.annotations.Test;
 
 public class TC_SignIn extends BaseClass{

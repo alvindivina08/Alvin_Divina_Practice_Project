@@ -1,6 +1,6 @@
-package com.teladoc.testcases;
+package com.testpractice.testcases;
 
-import com.teladoc.utilities.WebDriverFactory;
+import com.testpractice.utilities.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

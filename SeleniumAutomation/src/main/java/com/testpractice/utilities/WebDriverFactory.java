@@ -1,7 +1,6 @@
-package com.teladoc.utilities;
+package com.testpractice.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.poi.ss.formula.functions.WeekNum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
