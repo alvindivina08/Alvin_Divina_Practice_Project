@@ -7,4 +7,4 @@ To run these test we are going to need 4 things.
 4. set it as a maven project then download dependencies.
 5. right click testng.xml and run it. make sure to not change the thread count.
 
-This automation is running successfull parallel execution using Threadlocal driver.
+This automation is running successful parallel execution using Threadlocal method.
