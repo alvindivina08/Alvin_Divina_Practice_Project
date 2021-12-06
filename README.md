@@ -1,4 +1,4 @@
-# Alvin_Divina_teladoc_challenge
+# Alvin_Divina_Personal_Project
 
 To run these test we are going to need 4 things. 
 1. IntelliJ IDE with TestNG plugin
