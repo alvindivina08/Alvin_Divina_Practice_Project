@@ -68,7 +68,7 @@ public class SignInObject {
     @CacheLookup
     public WebElement OKBUTTON;
 
-    @FindBy(xpath="//button[contains(text(),'OK')]")
+    @FindBy(xpath="//span[contains(text(),'Last Name')]")
     @CacheLookup
     public WebElement LASTNAMETAB;
 
