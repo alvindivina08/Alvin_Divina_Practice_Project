@@ -7,10 +7,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
 public class BaseClass {
+    /*
+     * @ThreadLocal Enables you to create variables that can only be read and written by the same thread
+     */
     ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
     public String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
     WebDriverFactory webDriverFactory;
 
+
+    /*
+     * @Parameters - enables you to pass parameters from testng.xml file to a java method.
+     */
     @BeforeMethod
     @Parameters({"Browser"})
     public void setUp(String Browser) throws InterruptedException {
