@@ -3,6 +3,7 @@ package com.testpractice.pageImpl;
 import com.google.common.base.Function;
 import com.testpractice.pageObject.SignInObject;
 import com.testpractice.utilities.DeviceHelper;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -20,13 +21,13 @@ public class SignInImpl extends SignInObject {
     DeviceHelper helper;
     WebDriverWait wait;
 
-    public SignInImpl(WebDriver driver){
-        PageFactory.initElements(driver,this);
+    public SignInImpl(WebDriver driver) {
+        PageFactory.initElements(driver, this);
     }
 
     public void addUserAndValidate(WebDriver driver, String fName, String lName, String uName,
-                                   String pWord,String Company, String eMail, String pNumber, String Role) throws InterruptedException {
-        wait = new WebDriverWait(driver,30);
+                                   String pWord, String Company, String eMail, String pNumber, String Role) throws InterruptedException {
+        wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(ADDUSER));
         wait.until(ExpectedConditions.elementToBeClickable(ADDUSER));
         ADDUSER.click();
@@ -64,44 +65,16 @@ public class SignInImpl extends SignInObject {
         wait.until(ExpectedConditions.elementToBeClickable(SAVEBUTTON));
         SAVEBUTTON.click();
         System.out.println("validating user");
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//td[contains(text(),'"+fName+"')]"))));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//td[contains(text(),'" + fName + "')]"))));
     }
 
     public void deleteUser(WebDriver driver, String uName) {
-        Wait<WebDriver> fWait = new FluentWait<>(driver)
-                .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(1, TimeUnit.SECONDS)
-                .ignoring(NoSuchElementException.class);
-
-        WebElement element = fWait.until(new Function<WebDriver, WebElement>(){
-            WebDriverWait wait = new WebDriverWait(driver,10);
-            public WebElement apply(WebDriver driver) {
-                WebElement ele = driver.findElement(By.xpath("//tr//td[text()='" + uName + "']"));
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")));
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")));
-
-                if (ele.isDisplayed()) {
-                    System.out.println("element displayed?: " + ele.isDisplayed());
-                    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")));
-                    driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")).click();
-                    helper = new DeviceHelper(driver);
-                    try {
-                        helper.fluentWait(driver,OKBUTTON);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    wait.until(ExpectedConditions.elementToBeClickable(OKBUTTON));
-                    OKBUTTON.click();
-                    wait.until(ExpectedConditions.visibilityOf(LASTNAMETAB));
-                    wait.until(ExpectedConditions.elementToBeClickable(LASTNAMETAB));
-                    return ele;
-                } else {
-                    System.out.println("element displayed?: " + ele.isDisplayed());
-                    return null;
-                }
-            }
-
-        });
-        Assert.assertEquals(0,(driver.findElements(By.xpath("//tr//td[text()='" + uName + "']")).size()));
+        wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']"))));
+        driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(OKBUTTON));
+        OKBUTTON.click();
+        wait.until(ExpectedConditions.visibilityOf(LASTNAMETAB));
+        Assert.assertEquals(0, (driver.findElements(By.xpath("//tr//td[text()='" + uName + "']")).size()));
     }
 }
