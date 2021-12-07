@@ -13,6 +13,7 @@ import org.testng.annotations.Parameters;
 import org.testng.log4testng.Logger;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 
 public class BaseClass {
@@ -44,8 +45,8 @@ public class BaseClass {
         webDriverFactory = new WebDriverFactory();
         webDriverFactory.setDriver(Browser.toUpperCase());
         driver.set(webDriverFactory.getDriver());
-        Thread.sleep(5000);
         driver.get().get(URL);
+        driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         System.out.println(Thread.currentThread().getName());
     }
 

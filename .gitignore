@@ -1,3 +1,4 @@
 /SeleniumAutomation/target/
 /.idea/
 /SeleniumAutomation/SeleniumAutomation.iml
+/SeleniumAutomation/src/test/test-output/Reports/Spark/
