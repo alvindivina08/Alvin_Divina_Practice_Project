@@ -21,8 +21,8 @@ public class BaseClass {
     @BeforeMethod
     @Parameters({"Browser"})
     public void setUp(String Browser) throws InterruptedException {
-        webDriverFactory = WebDriverFactory.getInstance();
-        webDriverFactory.setDriver(Browser);
+        webDriverFactory = new WebDriverFactory();
+        webDriverFactory.setDriver(Browser.toUpperCase());
         driver.set(webDriverFactory.getDriver());
         Thread.sleep(5000);
         driver.get().get(URL);

@@ -6,13 +6,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class WebDriverFactory {
     private static WebDriverFactory instance = null;
-    static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    public void setDriver(String BROWSERTYPE) {
+    public static WebDriver driver;
 
+    public void setDriver(String BROWSERTYPE) {
         switch (BROWSERTYPE) {
             case "CHROME":
                 WebDriverManager.chromedriver().setup();
-                driver.set(new ChromeDriver());
+                driver = new ChromeDriver();
                 break;
         }
     }
@@ -26,12 +26,7 @@ public class WebDriverFactory {
 
     public WebDriver getDriver()
     {
-        return driver.get();
-    }
-
-    public static void quitDriver()
-    {
-        driver.get().quit();
+        return driver;
     }
 
 
