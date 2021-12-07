@@ -9,8 +9,10 @@ To run these test we are going to need 4 things.
 
 This automation is running successful parallel execution using Threadlocal method.
 
+added extent report in the framework. I can log and take screenshots per clicks and wait in the reporter. 
 
-![image](https://user-images.githubusercontent.com/29578497/144943303-50292fb1-571b-4c02-b73a-a4d3cbf3fd19.png)
+
+![image](https://user-images.githubusercontent.com/29578497/145095136-872bad43-2c4c-4244-a9d3-32f58b804844.png)
 
 
 ran the test back to back
