@@ -4,15 +4,17 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.testpractice.utilities.ExtentReport;
 import com.testpractice.utilities.WebDriverFactory;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.log4testng.Logger;
+import org.testng.annotations.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 
@@ -28,9 +30,16 @@ public class BaseClass {
     public String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
     WebDriverFactory webDriverFactory;
 
+    @BeforeSuite
+    public void beforeSuite() throws IOException {
+        Properties props = new Properties();
+        props.load(new FileInputStream("src/test/Configuration/log4j.properties"));
+        PropertyConfigurator.configure(props);
+    }
 
     @BeforeClass
     public void setUp(){
+        logger.info("@@@@@@@ SETUP @@@@@@@");
         extent = ExtentReport.extentReportGenerator();
     }
 
