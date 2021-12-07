@@ -8,3 +8,6 @@ To run these test we are going to need 4 things.
 5. right click testng.xml and run it. make sure to not change the thread count.
 
 This automation is running successful parallel execution using Threadlocal method.
+
+
+![image](https://user-images.githubusercontent.com/29578497/144943303-50292fb1-571b-4c02-b73a-a4d3cbf3fd19.png)
