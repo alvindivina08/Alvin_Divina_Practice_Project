@@ -15,7 +15,7 @@ Added a thread safe extent report in the framework. It can log and take screensh
 ![image](https://user-images.githubusercontent.com/29578497/145095136-872bad43-2c4c-4244-a9d3-32f58b804844.png)
 
 
-Ran the test back to back
+Ran the test back to back just to show how thread safe the threadlocal method is.
 
 
 ![image](https://user-images.githubusercontent.com/29578497/144966016-4a4e84fb-2c84-415b-847e-45503cd4bb6e.png)
