@@ -11,9 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class DeviceHelper {
-
     protected static WebDriver driver;
-    public ThreadLocal<FluentWait<WebDriver>> fwait = new ThreadLocal<>();
 
     public DeviceHelper(WebDriver driver){
         this.driver = driver;
@@ -24,25 +22,4 @@ public class DeviceHelper {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public WebElement fluentWait(WebDriver driver, final WebElement element) throws InterruptedException {
-        fwait.set(new FluentWait<WebDriver>(driver));
-                 fwait.get()
-                .withTimeout(30, TimeUnit.SECONDS)
-                .pollingEvery(1, TimeUnit.SECONDS)
-                .ignoring(NoSuchElementException.class);
-
-        WebElement foo = fwait.get().until(new Function<WebDriver, WebElement>() {
-            public WebElement apply(WebDriver driver) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return element;
-            }
-        });
-
-        return  foo;
-    };
-    
 }
