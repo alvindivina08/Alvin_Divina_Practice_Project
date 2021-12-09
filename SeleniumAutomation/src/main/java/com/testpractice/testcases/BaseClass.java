@@ -11,9 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.net.MalformedURLException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +27,7 @@ public class BaseClass {
     protected Logger logger = Logger.getLogger(BaseClass.class);
     public ExtentReports extent;
     public ExtentTest test;
-    public String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
+    public static String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
     WebDriverFactory webDriverFactory;
 
     @BeforeSuite
@@ -47,15 +47,15 @@ public class BaseClass {
      * @Parameters - enables you to pass parameters from testng.xml file to a java method.
      */
     @BeforeMethod
-    @Parameters({"Browser"})
-    public void setUp(String Browser, Method testMethod) throws InterruptedException {
+    @Parameters({"Device"})
+    public void setUp(String Device, Method testMethod) throws MalformedURLException {
         test = extent.createTest(testMethod.getName());
         extentTest.set(test);
         webDriverFactory = new WebDriverFactory();
-        webDriverFactory.setDriver(Browser.toUpperCase());
+        webDriverFactory.setDriver(Device.toUpperCase());
         driver.set(webDriverFactory.getDriver());
         driver.get().get(URL);
-        driver.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         System.out.println(Thread.currentThread().getName());
     }
 
