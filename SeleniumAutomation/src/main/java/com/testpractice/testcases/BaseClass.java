@@ -2,6 +2,7 @@ package com.testpractice.testcases;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.testpractice.utilities.ExtentReport;
 import com.testpractice.utilities.WebDriverFactory;
 import io.appium.java_client.AppiumDriver;
@@ -51,8 +52,7 @@ public class BaseClass {
     @BeforeMethod
     @Parameters({"Device"})
     public void setUp(String Device, Method testMethod) throws MalformedURLException {
-        test = extent.createTest(testMethod.getName());
-        extentTest.set(test);
+        setupExtentTest(testMethod);
         webDriverFactory = new WebDriverFactory();
         webDriverFactory.setDriver(Device.toUpperCase());
         driver.set(webDriverFactory.getDriver());
@@ -66,6 +66,12 @@ public class BaseClass {
         driver.get().close();
         driver.get().quit();
         extent.flush();
+    }
+
+    private void setupExtentTest(Method testMethod){
+        test = extent.createTest(testMethod.getName());
+        extentTest.set(test);
+        extentTest.get().log(Status.INFO,"@@@@@@@ SETUP @@@@@@@");
     }
 
 }
