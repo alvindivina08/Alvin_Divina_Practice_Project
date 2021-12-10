@@ -9,7 +9,7 @@ public class TC_SignIn extends BaseClass{
 
 
     @Test
-    public void addUser() throws InterruptedException {
+    public void addUser() {
         signInImpl = new SignInImpl(driver.get());
         signInImpl.addUserAndValidate(driver.get(),"Alvin","Divina","ragingpotato",
                 "teladoc50","COMPANYBBB","a@a.com","8478992828","CUSTOMER");
@@ -22,7 +22,7 @@ public class TC_SignIn extends BaseClass{
     }
 
     @Test
-    public void addUser1() throws InterruptedException {
+    public void addUser1() {
         signInImpl = new SignInImpl(driver.get());
         signInImpl.addUserAndValidate(driver.get(),"Alvin","Divina","ragingpotato",
                 "teladoc50","COMPANYBBB","a@a.com","8478992828","CUSTOMER");

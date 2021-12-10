@@ -26,7 +26,7 @@ public class SignInImpl extends SignInObject {
     }
 
     public void addUserAndValidate(WebDriver driver, String fName, String lName, String uName,
-                                   String pWord, String Company, String eMail, String pNumber, String Role) throws InterruptedException {
+                                   String pWord, String Company, String eMail, String pNumber, String Role) {
         wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.visibilityOf(ADDUSER));
         wait.until(ExpectedConditions.elementToBeClickable(ADDUSER));
