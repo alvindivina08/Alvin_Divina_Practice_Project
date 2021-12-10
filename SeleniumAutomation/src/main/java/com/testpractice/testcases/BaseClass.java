@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.testpractice.utilities.ExtentReport;
 import com.testpractice.utilities.WebDriverFactory;
+import io.appium.java_client.AppiumDriver;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
@@ -23,6 +24,7 @@ public class BaseClass {
      * @ThreadLocal Enables you to create variables that can only be read and written by the same thread
      */
     public ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
+    public ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<AppiumDriver>();
     public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
     protected Logger logger = Logger.getLogger(BaseClass.class);
     public ExtentReports extent;

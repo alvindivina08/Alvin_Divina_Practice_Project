@@ -1,5 +1,8 @@
 package com.testpractice.pageObject;
 
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.pagefactory.HowToUseLocators;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -71,6 +74,5 @@ public class SignInObject {
     @FindBy(xpath="//span[contains(text(),'Last Name')]")
     @CacheLookup
     public WebElement LASTNAMETAB;
-
 
 }
