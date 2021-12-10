@@ -12,7 +12,7 @@ This automation is running successful parallel execution using Threadlocal metho
 Added a thread safe extent report in the framework. It can log and take screenshots per commands in the reporter if implemented.
 
 
-![image](https://user-images.githubusercontent.com/29578497/145095136-872bad43-2c4c-4244-a9d3-32f58b804844.png)
+![image](https://user-images.githubusercontent.com/29578497/145624781-4acf6b4f-2fca-438d-900d-68a8a813525d.png)
 
 
 Ran the test back to back just to show how thread safe the threadlocal method is.
