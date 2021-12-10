@@ -36,32 +36,10 @@ public class SignInImpl extends SignInObject {
         LASTNAME.sendKeys(lName);
         USERNAME.sendKeys(uName);
         PASSWORD.sendKeys(pWord);
-        switch (Company) {
-            case "COMPANYAAA":
-                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
-                COMPANYAAA.click();
-                break;
-            case "COMPANYBBB":
-                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
-                COMPANYBBB.click();
-                break;
-        }
+        setCompany(Company);
         EMAIL.sendKeys(eMail);
         MOBILEPHONE.sendKeys(pNumber);
-        switch (Role) {
-            case "SALES":
-                wait.until(ExpectedConditions.elementToBeClickable(SALESTEAM));
-                SALESTEAM.click();
-                break;
-            case "CUSTOMER":
-                wait.until(ExpectedConditions.elementToBeClickable(CUSTOMER));
-                CUSTOMER.click();
-                break;
-            case "ADMIN":
-                wait.until(ExpectedConditions.elementToBeClickable(ADMIN));
-                ADMIN.click();
-                break;
-        }
+        setRoles(Role);
         wait.until(ExpectedConditions.elementToBeClickable(SAVEBUTTON));
         SAVEBUTTON.click();
         System.out.println("validating user");
@@ -76,5 +54,35 @@ public class SignInImpl extends SignInObject {
         OKBUTTON.click();
         wait.until(ExpectedConditions.visibilityOf(LASTNAMETAB));
         Assert.assertEquals(0, (driver.findElements(By.xpath("//tr//td[text()='" + uName + "']")).size()));
+    }
+
+    private void setCompany(String Company){
+        switch (Company) {
+            case "COMPANYAAA":
+                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
+                COMPANYAAA.click();
+                break;
+            case "COMPANYBBB":
+                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
+                COMPANYBBB.click();
+                break;
+        }
+    }
+
+    private void setRoles(String Role){
+        switch (Role) {
+            case "SALES":
+                wait.until(ExpectedConditions.elementToBeClickable(SALESTEAM));
+                SALESTEAM.click();
+                break;
+            case "CUSTOMER":
+                wait.until(ExpectedConditions.elementToBeClickable(CUSTOMER));
+                CUSTOMER.click();
+                break;
+            case "ADMIN":
+                wait.until(ExpectedConditions.elementToBeClickable(ADMIN));
+                ADMIN.click();
+                break;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class TC_SignIn extends BaseClass{
     }
 
     @Test
-    public void deleteUser() throws InterruptedException {
+    public void deleteUser() {
         signInImpl = new SignInImpl(driver.get());
         signInImpl.deleteUser(driver.get(), "Novak");
     }
@@ -29,7 +29,7 @@ public class TC_SignIn extends BaseClass{
     }
 
     @Test
-    public void deleteUser1() throws InterruptedException {
+    public void deleteUser1() {
         signInImpl = new SignInImpl(driver.get());
         signInImpl.deleteUser(driver.get(), "Novak");
     }

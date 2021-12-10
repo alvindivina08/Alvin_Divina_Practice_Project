@@ -21,7 +21,7 @@ public class WebDriverFactory {
 
     public void setDriver(String Device) throws MalformedURLException {
         switch (Device.toUpperCase()) {
-            //Chrome is a local device and can automatically set up using this dependency
+            //Chrome is a local device and can automatically set up using WebDriverManager
             case "CHROME":
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
@@ -56,7 +56,7 @@ public class WebDriverFactory {
         }
     }
 
-    //don't really need this when we are creating new instance per method in the base class
+    //don't really need this because we are creating new instance per method in the base class
     public static WebDriverFactory getInstance(){
         if (instance == null ){
             instance = new WebDriverFactory();
