@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
-    <test thread-count="4"  parallel="methods" name="src/main/java/com/teladoc/testcases/TC_SignIn.java">
+    <test thread-count="8"  parallel="methods" name="Testcases">
         <classes>
             <class name="com.testpractice.testcases.TC_SignIn">
+                <parameter name="Device" value="CHROME"></parameter>
+                <methods>
+                </methods>
+            </class>
+            <class name="com.testpractice.testcases.TC_SignIn_Two">
                 <parameter name="Device" value="CHROME"></parameter>
                 <methods>
                 </methods>
