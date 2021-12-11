@@ -26,11 +26,11 @@ public class BaseClass {
      */
     public ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
     public ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<AppiumDriver>();
-    public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+    public ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+    public static final String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
     protected Logger logger = Logger.getLogger(BaseClass.class);
     public ExtentReports extent;
     public ExtentTest test;
-    public static String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
     WebDriverFactory webDriverFactory;
 
     @BeforeSuite
