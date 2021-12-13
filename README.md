@@ -19,3 +19,6 @@ Ran the test back to back just to show how thread safe the threadlocal method is
 
 
 ![image](https://user-images.githubusercontent.com/29578497/144966016-4a4e84fb-2c84-415b-847e-45503cd4bb6e.png)
+
+Quick Demo
+https://www.youtube.com/watch?v=ScofFP4nvAE
