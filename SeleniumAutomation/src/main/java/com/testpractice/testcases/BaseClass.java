@@ -28,6 +28,7 @@ public class BaseClass {
     public ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<AppiumDriver>();
     public ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
     public static final String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
+    public static String deviceName = null;
     protected Logger logger = Logger.getLogger(BaseClass.class);
     public ExtentReports extent;
     public ExtentTest test;
@@ -53,11 +54,7 @@ public class BaseClass {
     @Parameters({"Device"})
     public void setUp(String Device, Method testMethod) throws MalformedURLException {
         setupExtentTest(testMethod);
-        webDriverFactory = new WebDriverFactory();
-        webDriverFactory.setDriver(Device.toUpperCase());
-        driver.set(webDriverFactory.getDriver());
-        driver.get().get(URL);
-        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        setupWebDrivers(Device);
         System.out.println(Thread.currentThread().getName());
     }
 
@@ -72,6 +69,20 @@ public class BaseClass {
         test = extent.createTest(testMethod.getName());
         extentTest.set(test);
         extentTest.get().log(Status.INFO,"@@@@@@@ SETUP @@@@@@@");
+    }
+
+    private void setupWebDrivers(String Device) throws MalformedURLException {
+        deviceName = Device;
+        webDriverFactory = new WebDriverFactory();
+        webDriverFactory.setDriver(Device.toUpperCase());
+        if (Device.toUpperCase().contains("APPIUM")) {
+            appiumDriver.set(webDriverFactory.getAppiumDriver());
+            driver.set(appiumDriver.get());
+        } else {
+            driver.set(webDriverFactory.getDriver());
+        }
+        driver.get().get(URL);
+        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
 }

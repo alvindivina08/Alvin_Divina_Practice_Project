@@ -15,6 +15,7 @@ import java.net.URL;
 public class WebDriverFactory {
     private static WebDriverFactory instance = null;
     public static WebDriver driver;
+    public static AppiumDriver appiumDriver;
     DesiredCapabilities capabilities;
     String baseurl = BaseClass.URL;
     String perfectoURL = "https://organization.perfectomobile.com/nexperience/perfectomobile/wd/hub/";
@@ -39,7 +40,7 @@ public class WebDriverFactory {
                 capabilities.setCapability("browserName", "Safari");
                 //best thing about this is we can polymorph webDriver to this driver when testing
                 //web browsers
-                driver = new AppiumDriver<>(new URL("http://localhost:4723/wd/hub"), capabilities);
+                appiumDriver = new AppiumDriver<>(new URL("http://localhost:4723/wd/hub"), capabilities);
                 break;
             case "PERFECTO CHROME":
                 capabilities = new DesiredCapabilities("Chrome", "", Platform.ANY);
@@ -67,6 +68,10 @@ public class WebDriverFactory {
     public WebDriver getDriver()
     {
         return driver;
+    }
+    public AppiumDriver getAppiumDriver()
+    {
+        return appiumDriver;
     }
 
 
