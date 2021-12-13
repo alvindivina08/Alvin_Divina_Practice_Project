@@ -72,4 +72,16 @@ public class SignInObject {
     @CacheLookup
     public WebElement LASTNAMETAB;
 
+    @FindBy(xpath="//button[@id='detailsButton']")
+    @CacheLookup
+    public WebElement APPIUMSHOWDETAILS;
+
+    @FindBy(xpath="(//a[contains(., 'visit this website')])")
+    @CacheLookup
+    public WebElement APPIUMVISITWEBSITE;
+
+    @FindBy(xpath = "//*[@label='Visit Website']")
+    @CacheLookup
+    public WebElement  NATIVEVISITTHISWEBSITE;
+
 }

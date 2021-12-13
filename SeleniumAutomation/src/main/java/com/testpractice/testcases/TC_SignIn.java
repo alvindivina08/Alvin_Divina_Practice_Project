@@ -11,6 +11,7 @@ public class TC_SignIn extends BaseClass{
     @Test
     public void addUser() {
         signInImpl = new SignInImpl(driver.get());
+        signInImpl.acceptInsecureCerts(appiumDriver.get(), extentTest.get());
         signInImpl.addUserAndValidate(driver.get(),"Alvin","Divina","ragingpotato",
                 "teladoc50","COMPANYBBB","a@a.com","8478992828","CUSTOMER");
     }
