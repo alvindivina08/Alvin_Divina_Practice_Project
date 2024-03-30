@@ -6,8 +6,6 @@ import com.aventstack.extentreports.Status;
 import com.testpractice.utilities.ExtentReport;
 import com.testpractice.utilities.WebDriverFactory;
 import io.appium.java_client.AppiumDriver;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 
 import org.testng.annotations.*;
@@ -16,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -28,22 +27,19 @@ public class BaseClass {
     public ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<AppiumDriver>();
     public ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
     public static final String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
+//    public static final String URL = "https://alvindivina.com";
+
     public static String deviceName = null;
-    protected Logger logger = Logger.getLogger(BaseClass.class);
     public ExtentReports extent;
     public ExtentTest test;
     WebDriverFactory webDriverFactory;
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
-        Properties props = new Properties();
-        props.load(new FileInputStream("src/test/Configuration/log4j.properties"));
-        PropertyConfigurator.configure(props);
     }
 
     @BeforeClass
     public void setUp(){
-        logger.info("@@@@@@@ SETUP @@@@@@@");
         extent = ExtentReport.extentReportGenerator();
     }
 
@@ -55,7 +51,6 @@ public class BaseClass {
     public void setUp(String Device, Method testMethod) throws MalformedURLException {
         setupExtentTest(testMethod);
         setupWebDrivers(Device);
-        System.out.println(Thread.currentThread().getName());
     }
 
     @AfterMethod
@@ -82,7 +77,7 @@ public class BaseClass {
             driver.set(webDriverFactory.getDriver());
         }
         driver.get().get(URL);
-        driver.get().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
     }
 
 }

@@ -2,24 +2,20 @@ package com.testpractice.pageImpl;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.google.common.base.Function;
 import com.testpractice.pageObject.SignInObject;
 import com.testpractice.testcases.BaseClass;
 import com.testpractice.utilities.DeviceHelper;
 import io.appium.java_client.AppiumDriver;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import io.appium.java_client.remote.SupportsContextSwitching;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
+import java.util.Map;
 
 public class SignInImpl extends SignInObject {
     String deviceName = BaseClass.deviceName;
@@ -30,13 +26,20 @@ public class SignInImpl extends SignInObject {
         PageFactory.initElements(driver, this);
     }
 
-    public void addUserAndValidate(WebDriver driver, String fName, String lName, String uName,
-                                   String pWord, String Company, String eMail, String pNumber, String Role) {
-        wait = new WebDriverWait(driver, 30);
+    public void addUserAndValidate(WebDriver driver, Map<String, String> userDetails) {
+        String fName = userDetails.get("fName");
+        String lName = userDetails.get("lName");
+        String uName = userDetails.get("uName");
+        String pWord = userDetails.get("pWord");
+        String Company = userDetails.get("Company");
+        String eMail = userDetails.get("eMail");
+        String pNumber = userDetails.get("pNumber");
+        String Role = userDetails.get("Role");
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(ADDUSER));
         wait.until(ExpectedConditions.elementToBeClickable(ADDUSER));
         ADDUSER.click();
-        System.out.println("adding user");
         FIRSTNAME.sendKeys(fName);
         LASTNAME.sendKeys(lName);
         USERNAME.sendKeys(uName);
@@ -47,12 +50,11 @@ public class SignInImpl extends SignInObject {
         setRoles(Role);
         wait.until(ExpectedConditions.elementToBeClickable(SAVEBUTTON));
         SAVEBUTTON.click();
-        System.out.println("validating user");
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//td[contains(text(),'" + fName + "')]"))));
     }
 
     public void deleteUser(WebDriver driver, String uName) {
-        wait = new WebDriverWait(driver, 30);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']"))));
         driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")).click();
         wait.until(ExpectedConditions.elementToBeClickable(OKBUTTON));
@@ -68,12 +70,12 @@ public class SignInImpl extends SignInObject {
             if(helper.booleanIsElementPresent(driver,APPIUMSHOWDETAILS,5)){
                 APPIUMSHOWDETAILS.click();
                 APPIUMVISITWEBSITE.click();
-                driver.context("NATIVE_APP");
+                ((SupportsContextSwitching) driver).context("NATIVE_APP");
                 NATIVEVISITTHISWEBSITE.click();
             }
-            driver.getContextHandles().forEach((handle) -> {
-                if (handle.toString().contains("WEBVIEW")) {
-                    driver.context((handle.toString()));
+            ((SupportsContextSwitching) driver).getContextHandles().forEach((handle) -> {
+                if (handle.contains("WEBVIEW")) {
+                    ((SupportsContextSwitching) driver).context((handle));
                 }
             });
         }
