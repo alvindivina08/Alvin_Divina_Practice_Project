@@ -27,20 +27,21 @@ public class WebDriverFactory {
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
                 break;
-                //You will need to setup Appium and Xcode simulators to your local device in order
-                //for this device to work.
+
+            /**
+             * You will need to set up Appium and Xcode simulators to your local device in order
+             * for this device to work.
+             */
+
             case "APPIUM IOS":
                 capabilities = new DesiredCapabilities();
                 capabilities.setCapability("platformName", "iOS");
                 capabilities.setCapability("deviceName", "iPhone 13");
                 capabilities.setCapability("platformVersion", "15.*");
                 capabilities.setCapability("safariInitialUrl", baseurl);
-                //I dont think this capability is working for iOS
                 capabilities.setCapability("acceptInsecureCerts", true);
                 capabilities.setCapability("browserName", "Safari");
-                //best thing about this is we can polymorph webDriver to this driver when testing
-                //web browsers
-                appiumDriver = new AppiumDriver<>(new URL("http://localhost:4723/wd/hub"), capabilities);
+                appiumDriver = new AppiumDriver(new URL("http://localhost:4723/wd/hub"), capabilities);
                 break;
             case "PERFECTO CHROME":
                 capabilities = new DesiredCapabilities("Chrome", "", Platform.ANY);
