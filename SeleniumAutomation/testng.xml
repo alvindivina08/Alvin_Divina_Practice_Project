@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test thread-count="8"  parallel="methods" name="Testcases">
+<suite name="All Test Suite" thread-count="8"  parallel="tests">
+    <test name="Test Cases">
         <classes>
-            <class name="com.testpractice.testcases.TC_SignIn">
-                <parameter name="Device" value="CHROME"></parameter>
+            <class name="com.testpractice.testcases.TC_Home_Page">
+                <parameter name="Device" value="CHROME"/>
                 <methods>
+                    <include name="testHomePage" />
                 </methods>
             </class>
-            <class name="com.testpractice.testcases.TC_SignIn_Two">
-                <parameter name="Device" value="CHROME"></parameter>
+        </classes>
+    </test>
+    <test name="Test iOS">
+        <classes>
+            <class name="com.testpractice.testcases.TC_Home_Page">
+                <parameter name="Device" value="APPIUM IOS"/>
                 <methods>
+                    <include name="testHomePage" />
                 </methods>
             </class>
         </classes>

@@ -13,9 +13,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class WebDriverFactory {
-    private static WebDriverFactory instance = null;
-    public static WebDriver driver;
-    public static AppiumDriver appiumDriver;
+    private static volatile WebDriverFactory instance = null;
+    private static final ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
     DesiredCapabilities capabilities;
     String baseurl = BaseClass.URL;
     String perfectoURL = "https://organization.perfectomobile.com/nexperience/perfectomobile/wd/hub/";
@@ -25,7 +25,7 @@ public class WebDriverFactory {
             //Chrome is a local device and can automatically set up using WebDriverManager
             case "CHROME":
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
+                driverThreadLocal.set(new ChromeDriver());
                 break;
 
             /**
@@ -36,12 +36,13 @@ public class WebDriverFactory {
             case "APPIUM IOS":
                 capabilities = new DesiredCapabilities();
                 capabilities.setCapability("platformName", "iOS");
-                capabilities.setCapability("deviceName", "iPhone 13");
-                capabilities.setCapability("platformVersion", "15.*");
+                capabilities.setCapability("deviceName", "iPhone 15 Pro Max");
+                capabilities.setCapability("platformVersion", "17.4");
                 capabilities.setCapability("safariInitialUrl", baseurl);
                 capabilities.setCapability("acceptInsecureCerts", true);
                 capabilities.setCapability("browserName", "Safari");
-                appiumDriver = new AppiumDriver(new URL("http://localhost:4723/wd/hub"), capabilities);
+                capabilities.setCapability("automationName", "XCuiTest");
+                appiumDriverThreadLocal.set(new AppiumDriver(new URL("http://127.0.0.1:4723/"), capabilities));
                 break;
             case "PERFECTO CHROME":
                 capabilities = new DesiredCapabilities("Chrome", "", Platform.ANY);
@@ -53,27 +54,24 @@ public class WebDriverFactory {
                 capabilities.setCapability("resolution", "1920x1080");
                 capabilities.setCapability("waitForAvailableLicense", true);
                 capabilities.setCapability("securityToken", System.getenv("perfectoToken"));
-                driver = new RemoteWebDriver(new URL(perfectoURL),capabilities);
+                driverThreadLocal.set(new RemoteWebDriver(new URL(perfectoURL),capabilities));
                 break;
         }
     }
 
     //don't really need this because we are creating new instance per method in the base class
     public static WebDriverFactory getInstance(){
-        if (instance == null ){
-            instance = new WebDriverFactory();
-        }
+        instance = new WebDriverFactory();
         return instance;
     }
 
     public WebDriver getDriver()
     {
-        return driver;
+        return driverThreadLocal.get();
     }
     public AppiumDriver getAppiumDriver()
     {
-        return appiumDriver;
+        return appiumDriverThreadLocal.get();
     }
-
 
 }

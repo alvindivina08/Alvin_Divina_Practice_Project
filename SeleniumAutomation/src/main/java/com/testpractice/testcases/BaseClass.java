@@ -10,13 +10,10 @@ import org.openqa.selenium.WebDriver;
 
 import org.testng.annotations.*;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.time.Duration;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 
 public class BaseClass {
@@ -26,13 +23,12 @@ public class BaseClass {
     public ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
     public ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<AppiumDriver>();
     public ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
-    public static final String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
-//    public static final String URL = "https://alvindivina.com";
+    public static final String URL = "https://alvindivina.com";
 
     public static String deviceName = null;
     public ExtentReports extent;
     public ExtentTest test;
-    WebDriverFactory webDriverFactory;
+    public WebDriverFactory webDriverFactory;
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
@@ -41,6 +37,7 @@ public class BaseClass {
     @BeforeClass
     public void setUp(){
         extent = ExtentReport.extentReportGenerator();
+        webDriverFactory = WebDriverFactory.getInstance();
     }
 
     /*
@@ -54,10 +51,16 @@ public class BaseClass {
     }
 
     @AfterMethod
-    public void tearDown(){
-        driver.get().close();
-        driver.get().quit();
-        extent.flush();
+    @Parameters({"Device"})
+    public void tearDown(String Device){
+        if (Device.toUpperCase().contains("APPIUM")) {
+            driver.get().quit();
+            extent.flush();
+        } else {
+            driver.get().close();
+            driver.get().quit();
+            extent.flush();
+        }
     }
 
     private void setupExtentTest(Method testMethod){
@@ -68,7 +71,6 @@ public class BaseClass {
 
     private void setupWebDrivers(String Device) throws MalformedURLException {
         deviceName = Device;
-        webDriverFactory = new WebDriverFactory();
         webDriverFactory.setDriver(Device.toUpperCase());
         if (Device.toUpperCase().contains("APPIUM")) {
             appiumDriver.set(webDriverFactory.getAppiumDriver());
@@ -77,7 +79,7 @@ public class BaseClass {
             driver.set(webDriverFactory.getDriver());
         }
         driver.get().get(URL);
-        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
 }
