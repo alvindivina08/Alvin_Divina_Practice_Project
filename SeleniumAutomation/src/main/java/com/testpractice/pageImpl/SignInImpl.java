@@ -43,16 +43,15 @@ public class SignInImpl extends SignInObject {
         LASTNAME.sendKeys(lName);
         USERNAME.sendKeys(uName);
         PASSWORD.sendKeys(pWord);
-        setCompany(Company);
+        setCompany(Company, driver);
         EMAIL.sendKeys(eMail);
         MOBILEPHONE.sendKeys(pNumber);
-        setRoles(Role);
+        setRoles(Role, driver);
         helper.click(driver, SAVEBUTTON);
         // Constructing custom XPath
         String userRowXPath = "//td[contains(text(),'" + fName + "')]";
-        
         // Validate if the user is added
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(userRowXPath))));
+        helper.isVisible(driver, driver.findElement(By.xpath(userRowXPath)));
     }
 
    public void deleteUser(WebDriver driver, String uName) {
@@ -89,32 +88,29 @@ public class SignInImpl extends SignInObject {
         }
     }
 
-    private void setCompany(String Company){
+    private void setCompany(String Company, WebDriver driver){
+        helper = new DeviceHelper(driver);
         switch (Company) {
             case "COMPANYAAA":
-                wait.until(ExpectedConditions.elementToBeClickable(COMPANYAAA));
-                COMPANYAAA.click();
+                helper.click(driver, COMPANYAAA);
                 break;
             case "COMPANYBBB":
-                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
-                COMPANYBBB.click();
+                helper.click(driver, COMPANYBBB);
                 break;
         }
     }
 
-    private void setRoles(String Role){
+    private void setRoles(String Role, WebDriver driver){
+        helper = new DeviceHelper(driver);
         switch (Role) {
             case "SALES":
-                wait.until(ExpectedConditions.elementToBeClickable(SALESTEAM));
-                SALESTEAM.click();
+                helper.click(driver, SALESTEAM);
                 break;
             case "CUSTOMER":
-                wait.until(ExpectedConditions.elementToBeClickable(CUSTOMER));
-                CUSTOMER.click();
+                helper.click(driver, CUSTOMER);
                 break;
             case "ADMIN":
-                wait.until(ExpectedConditions.elementToBeClickable(ADMIN));
-                ADMIN.click();
+                helper.click(driver, ADMIN);
                 break;
         }
     }

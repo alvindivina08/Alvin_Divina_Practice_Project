@@ -23,8 +23,8 @@ public class BaseClass {
     public ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
     public ThreadLocal<AppiumDriver> appiumDriver = new ThreadLocal<AppiumDriver>();
     public ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
-    // public static final String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
-    public static final String URL = "https://alvindivina.com";
+    public static final String URL = "https://protect-us.mimecast.com/s/Dq2tCqx82YfMWNPOFZubbx?domain=way2automation.com";
+    // public static final String URL = "https://alvindivina.com";
 
     public static String deviceName = null;
     public ExtentReports extent;

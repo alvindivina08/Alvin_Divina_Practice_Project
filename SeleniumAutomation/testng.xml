@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" thread-count="2"  parallel="tests">
-    <test name="Test Cases">
+<!--    <test name="Test Cases">-->
+<!--        <classes>-->
+<!--            <class name="com.testpractice.testcases.TC_Home_Page">-->
+<!--                <parameter name="Device" value="CHROME"/>-->
+<!--                <methods>-->
+<!--                    <include name="testHomePage" />-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test name="Test Two">
         <classes>
-            <class name="com.testpractice.testcases.TC_Home_Page">
+            <class name="com.testpractice.testcases.TC_SignIn">
                 <parameter name="Device" value="CHROME"/>
                 <methods>
-                    <include name="testHomePage" />
+                    <include name="addUser" />
+                    <include name="deleteUser" />
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="Test iOS">
-        <classes>
-            <class name="com.testpractice.testcases.TC_Home_Page">
-                <parameter name="Device" value="APPIUM IOS"/>
-                <methods>
-                    <include name="testHomePage" />
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="Test iOS">-->
+<!--        <classes>-->
+<!--            <class name="com.testpractice.testcases.TC_Home_Page">-->
+<!--                <parameter name="Device" value="APPIUM IOS"/>-->
+<!--                <methods>-->
+<!--                    <include name="testHomePage" />-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
