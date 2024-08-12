@@ -84,7 +84,7 @@ public class SignInImpl extends SignInObject {
     private void setCompany(String Company){
         switch (Company) {
             case "COMPANYAAA":
-                wait.until(ExpectedConditions.elementToBeClickable(COMPANYBBB));
+                wait.until(ExpectedConditions.elementToBeClickable(COMPANYAAA));
                 COMPANYAAA.click();
                 break;
             case "COMPANYBBB":

@@ -55,12 +55,11 @@ public class BaseClass {
     public void tearDown(String Device){
         if (Device.toUpperCase().contains("APPIUM")) {
             driver.get().quit();
-            extent.flush();
         } else {
             driver.get().close();
             driver.get().quit();
-            extent.flush();
         }
+        extent.flush();
     }
 
     private void setupExtentTest(Method testMethod){

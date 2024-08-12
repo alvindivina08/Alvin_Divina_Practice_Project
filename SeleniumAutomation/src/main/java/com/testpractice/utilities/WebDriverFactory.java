@@ -58,8 +58,7 @@ public class WebDriverFactory {
                 break;
         }
     }
-
-    //don't really need this because we are creating new instance per method in the base class
+    
     public static WebDriverFactory getInstance(){
         instance = new WebDriverFactory();
         return instance;
