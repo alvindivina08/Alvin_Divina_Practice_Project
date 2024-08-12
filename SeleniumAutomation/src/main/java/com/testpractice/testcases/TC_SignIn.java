@@ -36,17 +36,4 @@ public class TC_SignIn extends BaseClass{
         signInImpl = new SignInImpl(driver.get());
         signInImpl.deleteUser(driver.get(), "Novak");
     }
-
-    @Test
-    public void addUser1() {
-        signInImpl = new SignInImpl(driver.get());
-        signInImpl.addUserAndValidate(driver.get(),userDetails);
-    }
-
-    @Test
-    public void deleteUser1() {
-        signInImpl = new SignInImpl(driver.get());
-        signInImpl.deleteUser(driver.get(), "Novak");
-    }
-
 }

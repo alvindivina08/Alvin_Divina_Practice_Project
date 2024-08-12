@@ -9,6 +9,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -35,11 +36,9 @@ public class SignInImpl extends SignInObject {
         String eMail = userDetails.get("eMail");
         String pNumber = userDetails.get("pNumber");
         String Role = userDetails.get("Role");
+        helper = new DeviceHelper(driver);
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOf(ADDUSER));
-        wait.until(ExpectedConditions.elementToBeClickable(ADDUSER));
-        ADDUSER.click();
+        helper.click(driver, ADDUSER);
         FIRSTNAME.sendKeys(fName);
         LASTNAME.sendKeys(lName);
         USERNAME.sendKeys(uName);
@@ -48,19 +47,28 @@ public class SignInImpl extends SignInObject {
         EMAIL.sendKeys(eMail);
         MOBILEPHONE.sendKeys(pNumber);
         setRoles(Role);
-        wait.until(ExpectedConditions.elementToBeClickable(SAVEBUTTON));
-        SAVEBUTTON.click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//td[contains(text(),'" + fName + "')]"))));
+        helper.click(driver, SAVEBUTTON);
+        // Constructing custom XPath
+        String userRowXPath = "//td[contains(text(),'" + fName + "')]";
+        
+        // Validate if the user is added
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(userRowXPath))));
     }
 
-    public void deleteUser(WebDriver driver, String uName) {
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']"))));
-        driver.findElement(By.xpath("//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']")).click();
-        wait.until(ExpectedConditions.elementToBeClickable(OKBUTTON));
-        OKBUTTON.click();
+   public void deleteUser(WebDriver driver, String uName) {
+        DeviceHelper helper = new DeviceHelper(driver);
+
+        String deleteButtonXPath = "//tr//td[text()='" + uName + "']//following-sibling::td//button[@ng-click='delUser()']";
+        
+        WebElement deleteButton = driver.findElement(By.xpath(deleteButtonXPath));
+        helper.click(driver, deleteButton);
+        helper.click(driver, OKBUTTON);
+        
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(LASTNAMETAB));
-        Assert.assertEquals(0, (driver.findElements(By.xpath("//tr//td[text()='" + uName + "']")).size()));
+        
+        int remainingUsers = driver.findElements(By.xpath("//tr//td[text()='" + uName + "']")).size();
+        Assert.assertEquals(0, remainingUsers);
     }
 
     public void acceptInsecureCerts(AppiumDriver driver, ExtentTest reporter){

@@ -1,7 +1,6 @@
 package com.testpractice.utilities;
 
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,9 +20,17 @@ public class DeviceHelper {
         this.reporter = reporter;
     }
 
-    public void waitForElement(WebDriver driver, WebElement element) throws InterruptedException {
+    // Constructor without reporter (reporter is optional)
+    public DeviceHelper(WebDriver driver){
+        this.driver = driver;
+        this.reporter = null; // reporter is set to null if not provided
+    }
+
+    public void click(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.visibilityOf(element));
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
     }
 
     public boolean booleanIsElementPresent(WebDriver driver, WebElement element, int timeInSec) {
