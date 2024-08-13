@@ -32,10 +32,10 @@ public class SignInImpl extends SignInObject {
         String lName = userDetails.get("lName");
         String uName = userDetails.get("uName");
         String pWord = userDetails.get("pWord");
-        String Company = userDetails.get("Company");
+        String company = userDetails.get("Company");
         String eMail = userDetails.get("eMail");
         String pNumber = userDetails.get("pNumber");
-        String Role = userDetails.get("Role");
+        String role = userDetails.get("Role");
         helper = new DeviceHelper(driver);
 
         helper.click(driver, ADDUSER);
@@ -43,10 +43,10 @@ public class SignInImpl extends SignInObject {
         LASTNAME.sendKeys(lName);
         USERNAME.sendKeys(uName);
         PASSWORD.sendKeys(pWord);
-        setCompany(Company, driver);
+        setCompany(company, driver);
         EMAIL.sendKeys(eMail);
         MOBILEPHONE.sendKeys(pNumber);
-        setRoles(Role, driver);
+        setRoles(role, driver);
         helper.click(driver, SAVEBUTTON);
         // Constructing custom XPath
         String userRowXPath = "//td[contains(text(),'" + fName + "')]";
