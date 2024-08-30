@@ -1,6 +1,6 @@
-package com.testpractice.utilities;
+package testpractice.utilities;
 
-import com.testpractice.testcases.BaseClass;
+import testpractice.testcases.BaseClass;
 import io.appium.java_client.AppiumDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Platform;

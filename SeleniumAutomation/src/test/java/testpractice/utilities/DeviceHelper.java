@@ -1,4 +1,4 @@
-package com.testpractice.utilities;
+package testpractice.utilities;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;

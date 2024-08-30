@@ -1,10 +1,10 @@
-package com.testpractice.testcases;
+package testpractice.testcases;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.testpractice.utilities.ExtentReport;
-import com.testpractice.utilities.WebDriverFactory;
+import testpractice.utilities.ExtentReport;
+import testpractice.utilities.WebDriverFactory;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.WebDriver;
 

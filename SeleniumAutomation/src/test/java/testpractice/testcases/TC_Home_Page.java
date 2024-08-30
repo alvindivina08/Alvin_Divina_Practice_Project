@@ -1,6 +1,6 @@
-package com.testpractice.testcases;
+package testpractice.testcases;
 
-import com.testpractice.pageImpl.HomePageImpl;
+import testpractice.pageImpl.HomePageImpl;
 import org.testng.annotations.Test;
 
 public class TC_Home_Page extends BaseClass {

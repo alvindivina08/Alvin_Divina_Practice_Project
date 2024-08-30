@@ -1,4 +1,4 @@
-package com.testpractice.pageObject;
+package testpractice.pageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -20,6 +20,9 @@ public class SignInObject {
     @CacheLookup
     public WebElement LASTNAME;
 
+//    "/html/body/div/div[1]/div/main/div/h3[@id='username-login']"
+    //h3[contains(@id,'username-login')]
+//    WebElement username = driver.findElement(By.id("username-login"));
     @FindBy(xpath="//input[contains(@name,'UserName')]")
     @CacheLookup
     public WebElement USERNAME;

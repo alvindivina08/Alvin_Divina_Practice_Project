@@ -1,6 +1,6 @@
-package com.testpractice.testcases;
+package testpractice.testcases;
 
-import com.testpractice.pageImpl.SignInImpl;
+import testpractice.pageImpl.SignInImpl;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;

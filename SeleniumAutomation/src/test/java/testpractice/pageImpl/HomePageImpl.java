@@ -1,8 +1,8 @@
-package com.testpractice.pageImpl;
+package testpractice.pageImpl;
 
-import com.testpractice.pageObject.HomePage;
-import com.testpractice.testcases.BaseClass;
-import com.testpractice.utilities.DeviceHelper;
+import testpractice.pageObject.HomePage;
+import testpractice.testcases.BaseClass;
+import testpractice.utilities.DeviceHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;

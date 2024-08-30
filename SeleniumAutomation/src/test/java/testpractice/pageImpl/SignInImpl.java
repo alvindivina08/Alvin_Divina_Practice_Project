@@ -1,10 +1,10 @@
-package com.testpractice.pageImpl;
+package testpractice.pageImpl;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.testpractice.pageObject.SignInObject;
-import com.testpractice.testcases.BaseClass;
-import com.testpractice.utilities.DeviceHelper;
+import testpractice.pageObject.SignInObject;
+import testpractice.testcases.BaseClass;
+import testpractice.utilities.DeviceHelper;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.SupportsContextSwitching;
 import org.openqa.selenium.By;

@@ -13,7 +13,7 @@
 <!--    </test>-->
     <test name="Test Two">
         <classes>
-            <class name="com.testpractice.testcases.TC_SignIn">
+            <class name="testpractice.testcases.TC_SignIn">
                 <parameter name="Device" value="CHROME"/>
                 <methods>
                     <include name="addUser" />

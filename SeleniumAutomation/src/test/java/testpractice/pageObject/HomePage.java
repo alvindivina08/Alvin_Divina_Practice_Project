@@ -1,4 +1,4 @@
-package com.testpractice.pageObject;
+package testpractice.pageObject;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
